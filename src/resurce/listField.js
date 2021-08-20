@@ -3,21 +3,22 @@ const listField = [
     list_id: 1,
     field_name: 'user_id',
     set_field_name: '등록 번호',
-    visibility: false
+    visibility: false,
+    path: 'user_id'
   },
   {
     list_id: 1,
     field_name: 'user_login',
     set_field_name: '아이디',
     visibility: true,
-    order_by: 'login'
+    path: 'user_login'
   },
   {
     list_id: 1,
     field_name: 'user_name',
     set_field_name: '이름',
     visibility: true,
-    order_by: 'name'
+    path: 'user_name'
   },
   {
     list_id: 1,
@@ -30,7 +31,7 @@ const listField = [
     field_name: 'user_email',
     set_field_name: '이메일',
     visibility: true,
-    order_by: 'email'
+    path: 'user_email'
   },
   {
     list_id: 1,

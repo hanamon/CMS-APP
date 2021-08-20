@@ -14,7 +14,7 @@ const PageLi = styled.li`
   padding:5px 10px;
   margin:2.5px;
   background-color:#EEE;
-  /*&:hover{
+  &:hover{
     cursor:pointer;
     color:#FFF;
     background-color:#263A6C;
@@ -22,7 +22,7 @@ const PageLi = styled.li`
   &:focus::after{
     color:#FFF;
     background-color:#263A6C;
-  }*/
+  }
   &.current {
     color:#FFF;
     background-color:#263A6C;
@@ -47,6 +47,13 @@ function Pagination({ postsPerPage, totalPosts, currentPage, setCurrentPage }) {
     <div>
       <PageUl>
         {
+          !pageNumbers.length
+          ? (
+            <PageLi className="current" onClick={() => setCurrentPage(1)}>
+              <PageSpan>{1}</PageSpan>
+            </PageLi>
+          )
+          :
           pageNumbers.map((num) => {
             return (
               <PageLi className={num === currentPage ? 'current' : ''} key={num} onClick={() => setCurrentPage(num)}>

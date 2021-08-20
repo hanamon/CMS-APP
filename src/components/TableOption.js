@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function ScreenOption({ postsPerPage, setPostsPerPage, setCurrentPage }) {
+function TableOption({ postsPerPage, setPostsPerPage, setCurrentPage }) {
   const [pagingNum, setPagingNum] = useState(postsPerPage);
 
   function handleChangePagingNum(e) {
@@ -25,4 +25,4 @@ function ScreenOption({ postsPerPage, setPostsPerPage, setCurrentPage }) {
   );
 }
 
-export default ScreenOption;
+export default TableOption;
