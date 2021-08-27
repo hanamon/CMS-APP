@@ -1,14 +1,15 @@
 const express = require('express');
 const cors = require('cors');
 const app = express();
+const reuter = require('./router');
 const controllers = require('./controllers');
 
 // 미들웨어
-app.use(express.json());
 app.use(cors());
+app.use(express.json());
 
 // 라우팅
-app.use('/admin', controllers.admin);
+app.use('/admin', reuter.admin);
 app.use('/users', controllers.users);
 
 // 서버 실행

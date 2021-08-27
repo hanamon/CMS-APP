@@ -12,7 +12,7 @@ const listReducer = (state = { userList, listField }, action) => {
       return { userList: newUserList, listField };
     default:
       return state;
-  }
-}
+  };
+};
 
 export default listReducer;
