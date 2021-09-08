@@ -1,4 +1,7 @@
 module.exports = {
+  login: require('./login'),
+  signup: require('./signup'),
+  mypage: require('./mypage'),
   admin: require('./admin'),
-  users: require('./users')
-};
+  posts: require('./posts')
+}

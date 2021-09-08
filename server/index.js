@@ -1,18 +1,35 @@
-const express = require('express');
+require('dotenv').config();
+const fs = require('fs');
+const https = require('https');
 const cors = require('cors');
+const express = require('express');
+const cookieParser = require('cookie-parser');
+
 const app = express();
-const reuter = require('./router');
-const controllers = require('./controllers');
+const router = require('./router');
+const HTTPS_PORT = process.env.HTTPS_PORT || 4000;
 
 // 미들웨어
-app.use(cors());
 app.use(express.json());
+app.use(cookieParser());
+app.use(cors());
 
 // 라우팅
-app.use('/admin', reuter.admin);
-app.use('/users', controllers.users);
+app.use('/', router);
 
 // 서버 실행
-module.exports = app.listen(4000, () => {
-  console.log('🚀 Server is starting on 4000!');
-});
+let server;
+
+if( fs.existsSync('./key.pem') && fs.existsSync('./cert.pem') ){
+  const privateKey = fs.readFileSync(__dirname + '/key.pem', 'utf8');
+  const certificate = fs.readFileSync(__dirname + '/cert.pem', 'utf8');
+  const credentials = { key: privateKey, cert: certificate };
+
+  server = https.createServer(credentials, app);
+  server.listen(HTTPS_PORT, () => console.log('🚀 server runnning'));
+}
+else {
+  server = app.listen(HTTPS_PORT, () => console.log(`🚀 server runnning - port ${HTTPS_PORT}`))
+}
+
+module.exports = server;
