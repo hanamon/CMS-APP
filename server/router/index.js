@@ -5,6 +5,6 @@ router.post('/login', controllers.login);
 router.post('/signup', controllers.signup);
 router.get('/mypage', controllers.mypage);
 router.get('/admin', controllers.admin);
-router.get('/admin/posts', controllers.posts);
+router.get('/admin/posts', controllers.posts.get);
 
 module.exports = router;
