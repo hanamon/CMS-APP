@@ -1,5 +1,5 @@
+const { isAuthorized } = require('../tokenFunctions');
 const { User } = require('../../models');
-const { isAuthorized } = require('./index');
 
 module.exports = async (req, res) => {
   try {
@@ -10,7 +10,7 @@ module.exports = async (req, res) => {
     const userInfo = await User.findOne({ where: { user_login } });
     
     if( !userInfo ) return res.status(401).json({ data: null, message: 'not authorized' });
-    if( userInfo.dataValues.user_role !== 1 ) return res.status(403).json({ data: null, message: 'Forbidden' });
+    if( userInfo.dataValues.user_role !== 0 ) return res.status(403).json({ data: null, message: 'Forbidden' });
 
     // 토큰이 유효하거나 권한이 있는 경우 사용자 정보를 리턴한다.
     return userInfo;

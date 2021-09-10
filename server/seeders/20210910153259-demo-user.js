@@ -17,13 +17,20 @@ module.exports = {
         user_pass: '1234',
         user_name: '하나몬',
         user_email: 'hana@co.kr',
-        user_role: 1
+        user_role: 0
       },
       {
         user_login: 'kimcoding',
         user_pass: '1234',
         user_name: '김코딩',
         user_email: 'coding@co.kr',
+        user_role: 1
+      },
+      {
+        user_login: 'parkhacker',
+        user_pass: '1234',
+        user_name: '박해커',
+        user_email: 'hacker@co.kr',
         user_role: 5
       },
     ]);

@@ -2,6 +2,7 @@ require('dotenv').config();
 const fs = require('fs');
 const https = require('https');
 const cors = require('cors');
+const morgan = require('morgan');
 const express = require('express');
 const cookieParser = require('cookie-parser');
 
@@ -10,9 +11,10 @@ const router = require('./router');
 const HTTPS_PORT = process.env.HTTPS_PORT || 4000;
 
 // 미들웨어
-app.use(express.json());
-app.use(cookieParser());
 app.use(cors());
+app.use(morgan('dev'));
+app.use(cookieParser());
+app.use(express.json());
 
 // 라우팅
 app.use('/', router);

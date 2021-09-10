@@ -17,9 +17,9 @@ module.exports = {
   isAuthorized: (req) => {
     const authorization = req.headers['authorization'];
     if( !authorization ) return null;
-    const token = authorization.split(' ')[1];
+    const accessToken = authorization.split(' ')[1];
     try {
-      return jwt.verify(token, process.env.ACCESS_SECRET);
+      return jwt.verify(accessToken, process.env.ACCESS_SECRET);
     }
     catch (err) {
       return null;

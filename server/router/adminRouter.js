@@ -1,10 +1,11 @@
 const router = require('express').Router();
 const controllers = require('../controllers');
-const optionsRouter = require('./optionsRouter');
+const settingsRouter = require('./settingsRouter');
 
-router.get('/', controllers.admin.admin);
+router.get('/', controllers.admin.dashboard);
+router.get('/dashboard', controllers.admin.dashboard);
 router.get('/posts', controllers.admin.posts.get);
 router.get('/users', controllers.admin.users.get);
-router.use('/options', optionsRouter);
+router.use('/settings', settingsRouter);
 
 module.exports = router;

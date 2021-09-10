@@ -1,4 +1,4 @@
-const adminToken = require('../tokenFunctions/adminToken');
+const adminAnuthen = require('../authentication/adminAnuthen');
 const { User } = require('../../models');
 const { Op } = require("sequelize");
 
@@ -6,7 +6,7 @@ module.exports = {
   get: async (req, res) => {
     try {
       // 관리자 인증 검사
-      //const userInfo = await adminToken(req, res);
+      //const userInfo = await adminAnuthen(req, res);
       
       let { paged, post_number, search } = req.query;
       const queryKeys = Object.keys(req.query);

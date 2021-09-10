@@ -1,6 +1,6 @@
 module.exports = {
-  admin: require('./admin'),
+  dashboard: require('./dashboard'),
   posts: require('./posts'),
   users: require('./users'),
-  options: require('./options')
+  settings: require('./settings')
 }
