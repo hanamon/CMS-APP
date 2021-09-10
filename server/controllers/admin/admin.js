@@ -1,4 +1,4 @@
-const adminToken = require('./tokenFunctions/adminToken');
+const adminToken = require('../tokenFunctions/adminToken');
 
 module.exports = async (req, res) => {
   try {

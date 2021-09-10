@@ -1,5 +1,5 @@
-const { User } = require('../models'); 
-const { generateAccessToken, generateRefreshToken, sendRefeshToken, sendAccessToken } = require('./tokenFunctions');
+const { User } = require('../../models'); 
+const { generateAccessToken, generateRefreshToken, sendRefeshToken, sendAccessToken } = require('../tokenFunctions');
 
 module.exports = async (req, res) => {
   try {

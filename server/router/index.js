@@ -1,11 +1,10 @@
 const router = require('express').Router();
 const controllers = require('../controllers');
+const adminRouter = require('./adminRouter');
 
-router.post('/login', controllers.login);
-router.post('/signup', controllers.signup);
-router.get('/mypage', controllers.mypage);
-router.get('/admin', controllers.admin);
-router.get('/admin/posts', controllers.posts.get);
-router.get('/admin/users', controllers.users.get);
+router.post('/login', controllers.user.login);
+router.post('/signup', controllers.user.signup);
+router.get('/mypage', controllers.user.mypage);
+router.use('/admin', adminRouter);
 
 module.exports = router;
