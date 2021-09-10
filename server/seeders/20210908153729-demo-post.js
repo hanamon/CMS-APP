@@ -14,7 +14,7 @@ module.exports = {
     return queryInterface.bulkInsert('Posts', [
       {
         post_path: 'javascript-what-is-this',
-        post_title: '[JavaScript] What is This?',
+        post_title: '[JavaScript] this란 무엇일까?',
         post_content: 'JavaScript This Keyword is ...'
       },
       {

@@ -16,7 +16,8 @@ module.exports = {
         user_login: 'hanamon',
         user_pass: '1234',
         user_name: '하나몬',
-        user_email: 'hana@co.kr'
+        user_email: 'hana@co.kr',
+        user_role: 1
       },
       {
         user_login: 'kimcoding',

@@ -1,9 +1,12 @@
+const adminToken = require('./tokenFunctions/adminToken');
 const { Post } = require('../models');
 const { Op } = require("sequelize");
 
 module.exports = {
   get: async (req, res) => {
     try {
+      const userInfo = await adminToken(req, res);
+      
       const queryKeys = Object.keys(req.query);
       const queryValues = Object.values(req.query);
       const postAttribu = Post.rawAttributes;
