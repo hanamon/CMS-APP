@@ -23,7 +23,8 @@ module.exports = {
         user_login: 'kimcoding',
         user_pass: '1234',
         user_name: '김코딩',
-        user_email: 'coding@co.kr'
+        user_email: 'coding@co.kr',
+        user_role: 5
       },
     ]);
   },
