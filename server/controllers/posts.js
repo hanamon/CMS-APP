@@ -17,7 +17,7 @@ module.exports = {
       isNaN(paged) || Number(paged) < 1 ? paged = 1 : paged = Number(paged);
       isNaN(post_number) ? post_number = 5 : post_number < 1 ? post_number = 1 : post_number = Number(post_number);
 
-      // 필드가 있는 쿼리만 객체로 만들어서 배열에 담는다.
+      // DB에서 필드가 존재하는 쿼리만 객체로 만들어서 배열에 담는다.
       const queryArr = queryKeys.reduce((acc, cur, idx) => {
         if( Post.rawAttributes[cur] ) {
           const obj = {};
@@ -47,6 +47,7 @@ module.exports = {
         offset: (paged-1)*post_number, 
         limit: post_number 
       });
+
       return res.status(200).json({ data: { posts }, message: 'ok' });
     }
     catch (err) {
