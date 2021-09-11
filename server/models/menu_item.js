@@ -3,7 +3,7 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Post extends Model {
+  class Menu_Item extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -13,32 +13,31 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   };
-  Post.init({
-    post_path: {
+  Menu_Item.init({
+    menu_id: {
       allowNull: false,
-      type: DataTypes.STRING(200),
-      unique: true
+      type: DataTypes.BIGINT(20),
+      references:{ model: 'Menus', key: 'id' }
     },
-    post_title: {
+    menu_item_url: {
       allowNull: false,
-      type: DataTypes.TEXT
+      type: DataTypes.STRING(200)
     },
-    post_content: {
-      type: DataTypes.TEXT('long')
+    menu_item_label: {
+      type: DataTypes.STRING(200)
     },
-    post_type: {
+    menu_item_number: {
+      allowNull: false,
+      type: DataTypes.INTEGER(20)
+    },
+    menu_item_visibility: {
       allowNull: false,
       type: DataTypes.STRING(20),
-      defaultValue: 'post'
-    },
-    post_status: {
-      allowNull: false,
-      type: DataTypes.STRING(20),
-      defaultValue: 'publish'
+      defaultValue: 'all'
     }
   }, {
     sequelize,
-    modelName: 'Post',
+    modelName: 'Menu_Item',
   });
-  return Post;
+  return Menu_Item;
 };

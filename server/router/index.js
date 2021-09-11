@@ -3,6 +3,8 @@ const controllers = require('../controllers');
 const mypageRouter = require('./mypageRouter');
 const adminRouter = require('./adminRouter');
 
+router.get('/menu-items', controllers.menuItems.get);
+
 router.get('/signup', controllers.signup.get);
 router.post('/signup', controllers.signup.post);
 
