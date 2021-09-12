@@ -2,12 +2,6 @@ const bcrypt = require('bcrypt');
 const { User } = require('../models');
 
 module.exports = {
-  get: (req, res) => {
-    // 이미 로그인 되어있는지 확인한다.
-    const accessTokenData = isAuthorized(req);
-    if( accessTokenData ) return res.status(301).redirect('/mypage');
-    res.status(200).json({ message: 'ok' });
-  },
   post: async (req, res) => {
     try {
       let { user_login, user_pass, user_name, user_email } = req.body;

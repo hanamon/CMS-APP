@@ -24,6 +24,11 @@ module.exports = {
         allowNull: false,
         type: Sequelize.INTEGER(20)
       },
+      menu_item_exact: {
+        allowNull: false,
+        type: Sequelize.BOOLEAN,
+        defaultValue: false
+      },
       menu_item_visibility: {
         allowNull: false,
         type: Sequelize.STRING(20),

@@ -3,16 +3,16 @@ const jwt = require('jsonwebtoken');
 
 module.exports = {
   generateAccessToken: (data) => {
-    return jwt.sign(data, process.env.ACCESS_SECRET, { expiresIn: '15s' });
+    return jwt.sign(data, process.env.ACCESS_SECRET, { expiresIn: '1h' });
   },
   generateRefreshToken: (data) => {
-    return jwt.sign(data, process.env.REFRESH_SECRET, { expiresIn: '30d' });
+    return jwt.sign(data, process.env.REFRESH_SECRET, { expiresIn: '7d' });
   },
   sendRefeshToken: (res, refreshToken) => {
     res.cookie('refreshToken', refreshToken, { httpOnly: true });
   },
-  sendAccessToken: (res, accessToken) => {
-    res.status(200).json({ data: { accessToken }, message: 'ok' });
+  sendAccessToken: (res, accessToken, userInfo) => {
+    res.status(200).json({ data: { accessToken, userInfo }, message: 'ok' });
   },
   isAuthorized: (req) => {
     const authorization = req.headers['authorization'];

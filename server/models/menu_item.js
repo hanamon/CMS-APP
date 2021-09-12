@@ -30,6 +30,11 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       type: DataTypes.INTEGER(20)
     },
+    menu_item_exact: {
+      allowNull: false,
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
+    },
     menu_item_visibility: {
       allowNull: false,
       type: DataTypes.STRING(20),

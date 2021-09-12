@@ -8,7 +8,7 @@
 
 ## API
 
-- [POST] /login
+- [GET/POST] /login
 - [POST] /signup
 - [GET] /logout
 

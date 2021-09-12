@@ -31,6 +31,7 @@ module.exports = {
         defaultValue: 'publish'
       },
       post_author: {
+        allowNull: false,
         type: Sequelize.BIGINT(20),
         references:{ model: 'Users', key: 'id' }
       },

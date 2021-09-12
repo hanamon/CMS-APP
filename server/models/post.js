@@ -35,7 +35,11 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       type: DataTypes.STRING(20),
       defaultValue: 'publish'
-    }
+    },
+    post_author: {
+      allowNull: false,
+      type: DataTypes.BIGINT(20)
+    },
   }, {
     sequelize,
     modelName: 'Post',

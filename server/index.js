@@ -11,10 +11,14 @@ const router = require('./router');
 const HTTPS_PORT = process.env.HTTPS_PORT || 4000;
 
 // 미들웨어
-app.use(cors());
 app.use(morgan('dev'));
 app.use(cookieParser());
 app.use(express.json());
+app.use(cors({
+  origin: ["http://localhost:3000"],
+  credentials: true,
+  methods: ["GET", "POST", "OPTIONS"],
+}));
 
 // 라우팅
 app.use('/', router);
