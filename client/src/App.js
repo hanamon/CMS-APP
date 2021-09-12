@@ -8,6 +8,7 @@ import Login from './pages/Login';
 import Logout from './pages/Logout';
 import Signup from './pages/Signup';
 import Mypage from './pages/Mypage';
+import Hanamon from './pages/Hanamon';
 
 function App() {
   const state = useSelector((state) => state.accessTokenReducer);
@@ -82,6 +83,9 @@ function App() {
               </Route>
               <Route path="/mypage">
                 { !loginState ? <Redirect to="/login" /> : <Mypage loginState={loginState} /> }
+              </Route>
+              <Route path="/hanamon">
+                <Hanamon />
               </Route>
             </Switch>
           </main>

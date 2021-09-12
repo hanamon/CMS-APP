@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { Switch, Route, useHistory } from 'react-router-dom';
 import MypageNav from '../components/MypageNav';
 import MypagePosts from './MypagePosts';
+import MypageProfile from './MypageProfile';
 
 function Mypage({ loginState }) {
   const history = useHistory();
@@ -18,14 +19,14 @@ function Mypage({ loginState }) {
         <Route exact path="/mypage/dashboard">
           대시보드
         </Route>
-        <Route exact path="/mypage/posts">
+        <Route path="/mypage/posts">
           <MypagePosts />
         </Route>
         <Route exact path="/mypage/comments">
           댓글
         </Route>
         <Route exact path="/mypage/profile">
-          프로필
+          <MypageProfile />
         </Route>
         <Route exact path="/mypage/account">
           계정
