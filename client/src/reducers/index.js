@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
-import menuItemsReducer from './menuItemsReducer';
 import accessTokenReducer from './accessTokenReducer';
+import mainMenuItemsReducer from './mainMenuItemsReducer';
 
 const rootReducer = combineReducers({
-  menuItemsReducer,
-  accessTokenReducer
+  accessTokenReducer,
+  mainMenuItemsReducer
 });
 
 export default rootReducer;
