@@ -15,4 +15,6 @@ router.get('/logout', controllers.logout);
 router.use('/mypage', mypageRouter);
 router.use('/admin', adminRouter);
 
+router.get('/:userId', controllers.users.get);
+
 module.exports = router;
