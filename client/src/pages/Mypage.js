@@ -16,6 +16,9 @@ function Mypage({ loginState }) {
       <h2>마이페이지</h2>
       <MypageNav />
       <Switch>
+        <Route exact path="/mypage">
+          대시보드
+        </Route>
         <Route exact path="/mypage/dashboard">
           대시보드
         </Route>

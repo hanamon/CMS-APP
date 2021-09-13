@@ -11,6 +11,8 @@ import Mypage from './pages/Mypage';
 import Profile from './pages/Profile';
 import Post from './pages/Post';
 import Blog from './pages/Blog';
+import Project from './pages/Project';
+import ArtWork from './pages/ArtWork';
 
 function App() {
   const state = useSelector((state) => state.accessTokenReducer);
@@ -68,11 +70,18 @@ function App() {
           <main>
             <Switch>
               <Route exact path="/">홈</Route>
-              <Route exact path="/blog">
+              <Route path="/search">
+                검색 결과
+              </Route>
+              <Route path="/blog">
                 <Blog />
               </Route>
-              <Route exact path="/project">프로젝트</Route>
-              <Route exact path="/artwork">작품</Route>
+              <Route path="/project">
+                <Project />
+              </Route>
+              <Route path="/artwork">
+                <ArtWork />
+              </Route>
               <Route exact path="/about">소개</Route>
               <Route exact path="/login">
                 <Login isLogin={isLogin} loginState={loginState} />
