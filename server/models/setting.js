@@ -14,6 +14,12 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Setting.init({
+    setting_id: {
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true,
+      type: DataTypes.BIGINT(20)
+    },
     setting_name: {
       allowNull: false,
       type: DataTypes.STRING(200)
@@ -21,10 +27,23 @@ module.exports = (sequelize, DataTypes) => {
     setting_value: {
       allowNull: false,
       type: DataTypes.TEXT('long')
+    },
+    setting_created: {
+      allowNull: false,
+      type: DataTypes.DATE,
+      defaultValue: new Date()
+    },
+    setting_updated: {
+      allowNull: false,
+      type: DataTypes.DATE,
+      defaultValue: new Date()
     }
   }, {
     sequelize,
     modelName: 'Setting',
+    id: 'setting_id',
+    createdAt: 'setting_created',
+    updatedAt: 'setting_updated'
   });
   return Setting;
 };

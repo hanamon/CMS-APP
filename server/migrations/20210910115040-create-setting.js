@@ -2,7 +2,7 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('Settings', {
-      id: {
+      setting_id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
@@ -16,12 +16,12 @@ module.exports = {
         allowNull: false,
         type: Sequelize.TEXT('long')
       },
-      createdAt: {
+      setting_created: {
         allowNull: false,
         type: Sequelize.DATE,
         defaultValue: Sequelize.fn('NOW')
       },
-      updatedAt: {
+      setting_updated: {
         allowNull: false,
         type: Sequelize.DATE,
         defaultValue: Sequelize.fn('NOW')

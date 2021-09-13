@@ -14,6 +14,12 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Post.init({
+    post_id: {
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true,
+      type: DataTypes.BIGINT(20)
+    },
     post_path: {
       allowNull: false,
       type: DataTypes.STRING(200),
@@ -40,9 +46,22 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       type: DataTypes.BIGINT(20)
     },
+    post_created: {
+      allowNull: false,
+      type: DataTypes.DATE,
+      defaultValue: new Date()
+    },
+    post_updated: {
+      allowNull: false,
+      type: DataTypes.DATE,
+      defaultValue: new Date()
+    }
   }, {
     sequelize,
     modelName: 'Post',
+    id: 'post_id',
+    createdAt: 'post_created',
+    updatedAt: 'post_updated'
   });
   return Post;
 };

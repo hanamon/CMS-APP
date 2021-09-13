@@ -14,6 +14,12 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   User.init({
+    user_id: {
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true,
+      type: DataTypes.BIGINT(20)
+    },
     user_login: {
       allowNull: false,
       type: DataTypes.STRING
@@ -44,10 +50,23 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       type: DataTypes.INTEGER,
       defaultValue: 0
+    },
+    user_created: {
+      allowNull: false,
+      type: DataTypes.DATE,
+      defaultValue: new Date()
+    },
+    user_updated: {
+      allowNull: false,
+      type: DataTypes.DATE,
+      defaultValue: new Date()
     }
   }, {
     sequelize,
     modelName: 'User',
+    id: 'user_id',
+    createdAt: 'user_created',
+    updatedAt: 'user_updated'
   });
   return User;
 };

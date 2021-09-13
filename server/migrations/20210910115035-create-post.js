@@ -2,7 +2,7 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('Posts', {
-      id: {
+      post_id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
@@ -33,14 +33,14 @@ module.exports = {
       post_author: {
         allowNull: false,
         type: Sequelize.BIGINT(20),
-        references:{ model: 'Users', key: 'id' }
+        references:{ model: 'Users', key: 'user_id' }
       },
-      createdAt: {
+      post_created: {
         allowNull: false,
         type: Sequelize.DATE,
         defaultValue: Sequelize.fn('NOW')
       },
-      updatedAt: {
+      post_updated: {
         allowNull: false,
         type: Sequelize.DATE,
         defaultValue: Sequelize.fn('NOW')
