@@ -1,34 +1,27 @@
 'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('Roles', {
-      role_id: {
+    await queryInterface.createTable('Terms', {
+      term_id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.BIGINT(20)
       },
-      role_number: {
+      term_name: {
         allowNull: false,
-        type: Sequelize.INTEGER(20),
-        unique: true
+        type: Sequelize.STRING(200)
       },
-      role_name: {
+      term_path: {
         allowNull: false,
-        type: Sequelize.STRING(20),
-        unique: true
+        type: Sequelize.STRING(200)
       },
-      role_path: {
-        allowNull: false,
-        type: Sequelize.STRING(20),
-        unique: true
-      },
-      role_created: {
+      term_created: {
         allowNull: false,
         type: Sequelize.DATE,
         defaultValue: Sequelize.fn('NOW')
       },
-      role_updated: {
+      term_updated: {
         allowNull: false,
         type: Sequelize.DATE,
         defaultValue: Sequelize.fn('NOW')
@@ -36,6 +29,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('Roles');
+    await queryInterface.dropTable('Terms');
   }
 };

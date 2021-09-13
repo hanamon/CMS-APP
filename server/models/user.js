@@ -41,6 +41,9 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING(60),
       unique: true
     },
+    user_display: {
+      type: DataTypes.STRING(60)
+    },
     user_role: {
       allowNull: false,
       type: DataTypes.INTEGER,

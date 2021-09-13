@@ -29,6 +29,9 @@ module.exports = {
         type: Sequelize.STRING(60),
         unique: true
       },
+      user_display: {
+        type: Sequelize.STRING(60)
+      },
       user_role: {
         allowNull: false,
         type: Sequelize.INTEGER,

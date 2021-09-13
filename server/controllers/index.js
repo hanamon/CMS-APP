@@ -1,8 +1,9 @@
 module.exports = {
-  login: require('./login'),
-  signup: require('./signup'),
   logout: require('./logout'),
+  signup: require('./signup'),
+  login: require('./login'),
   mypage: require('./mypage'),
   users: require('./users'),
+  posts: require('./posts'),
   admin: require('./admin')
 }

@@ -1,34 +1,31 @@
 'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('Roles', {
-      role_id: {
+    await queryInterface.createTable('Terms_Taxonomies', {
+      terms_taxonomy_id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.BIGINT(20)
       },
-      role_number: {
+      term_id: {
         allowNull: false,
-        type: Sequelize.INTEGER(20),
-        unique: true
+        type: Sequelize.BIGINT(20),
+        references:{ model: 'Terms', key: 'term_id' }
       },
-      role_name: {
+      terms_taxonomy_path: {
         allowNull: false,
-        type: Sequelize.STRING(20),
-        unique: true
+        type: Sequelize.STRING(30)
       },
-      role_path: {
-        allowNull: false,
-        type: Sequelize.STRING(20),
-        unique: true
+      terms_taxonomy_description: {
+        type: Sequelize.TEXT('long')
       },
-      role_created: {
+      terms_taxonomy_created: {
         allowNull: false,
         type: Sequelize.DATE,
         defaultValue: Sequelize.fn('NOW')
       },
-      role_updated: {
+      terms_taxonomy_updated: {
         allowNull: false,
         type: Sequelize.DATE,
         defaultValue: Sequelize.fn('NOW')
@@ -36,6 +33,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('Roles');
+    await queryInterface.dropTable('Terms_Taxonomies');
   }
 };

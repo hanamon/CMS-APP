@@ -3,7 +3,7 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Role extends Model {
+  class Term extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -13,44 +13,33 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   };
-  Role.init({
-    role_id: {
+  Term.init({
+    term_id: {
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
       type: DataTypes.BIGINT(20)
     },
-    role_number: {
+    term_name: {
       allowNull: false,
-      type: DataTypes.INTEGER(20),
-      unique: true
+      type: DataTypes.STRING(200)
     },
-    role_name: {
-      allowNull: false,
-      type: DataTypes.STRING(60),
-      unique: true
-    },
-    role_path: {
-      allowNull: false,
-      type: DataTypes.STRING(60),
-      unique: true
-    },
-    role_created: {
+    term_created: {
       allowNull: false,
       type: DataTypes.DATE,
       defaultValue: new Date()
     },
-    role_updated: {
+    term_updated: {
       allowNull: false,
       type: DataTypes.DATE,
       defaultValue: new Date()
     }
   }, {
     sequelize,
-    modelName: 'Role',
-    id: 'role_id',
-    createdAt: 'role_created',
-    updatedAt: 'role_updated'
+    modelName: 'Term',
+    id: 'term_id',
+    createdAt: 'term_created',
+    updatedAt: 'term_updated'
   });
-  return Role;
+  return Term;
 };

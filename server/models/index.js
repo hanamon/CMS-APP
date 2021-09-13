@@ -34,4 +34,18 @@ Object.keys(db).forEach(modelName => {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
+// associations 설정
+const { User, Post, Term, Term_Relationship, Terms_Taxonomy } = sequelize.models;
+User.hasMany(Post, { foreignKey: 'post_author' });
+Post.belongsTo(User, { foreignKey: 'post_author' });
+
+Post.hasMany(Term_Relationship, { foreignKey: 'post_id' });
+Term_Relationship.belongsTo(Post, { foreignKey: 'post_id' });
+
+Term.hasMany(Term_Relationship, { foreignKey: 'term_id' });
+Term_Relationship.belongsTo(Term, { foreignKey: 'term_id' });
+
+Terms_Taxonomy.hasMany(Term_Relationship, { foreignKey: 'term_id' });
+Term_Relationship.belongsTo(Terms_Taxonomy, { foreignKey: 'term_id' });
+
 module.exports = db;

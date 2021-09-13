@@ -22,6 +22,7 @@ module.exports = {
         user_pass: hash,
         user_name: '하나몬',
         user_email: 'hanamon@co.kr',
+        user_display: 'hanamon',
         user_role: 0
       },
       {
@@ -29,6 +30,7 @@ module.exports = {
         user_pass: hash,
         user_name: '김코딩',
         user_email: 'coding@co.kr',
+        user_display: 'kimcoding',
         user_role: 1
       },
       {
@@ -36,6 +38,7 @@ module.exports = {
         user_pass: hash,
         user_name: '박해커',
         user_email: 'hacker@co.kr',
+        user_display: 'parkhacker',
         user_role: 5
       },
     ]);

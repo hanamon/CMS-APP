@@ -10,6 +10,10 @@ const app = express();
 const router = require('./router');
 const HTTPS_PORT = process.env.HTTPS_PORT || 4000;
 
+process.on('uncaughtException', (err) => {
+  console.error('예기치 못한 에러', err);
+});
+
 // 미들웨어
 app.use(morgan('dev'));
 app.use(cookieParser());

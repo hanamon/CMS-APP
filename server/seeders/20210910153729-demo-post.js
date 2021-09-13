@@ -25,7 +25,7 @@ module.exports = {
         post_title: '[JavaScript] 변수 선언 키워드',
         post_content: '자바스크립트 변수 선언 키워드 세 가지를 알아봅시다.',
         post_type: 'post',
-        post_status: 'publish',
+        post_status: 'private',
         post_author: 1
       },
       {

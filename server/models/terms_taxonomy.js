@@ -3,7 +3,7 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Role extends Model {
+  class Terms_Taxonomy extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -13,44 +13,40 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   };
-  Role.init({
-    role_id: {
+  Terms_Taxonomy.init({
+    terms_taxonomy_id: {
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
       type: DataTypes.BIGINT(20)
     },
-    role_number: {
+    term_id: {
       allowNull: false,
-      type: DataTypes.INTEGER(20),
-      unique: true
+      type: DataTypes.BIGINT(20),
     },
-    role_name: {
+    terms_taxonomy_path: {
       allowNull: false,
-      type: DataTypes.STRING(60),
-      unique: true
+      type: DataTypes.STRING(30)
     },
-    role_path: {
-      allowNull: false,
-      type: DataTypes.STRING(60),
-      unique: true
+    terms_taxonomy_description: {
+      type: DataTypes.TEXT('long')
     },
-    role_created: {
+    terms_taxonomy_created: {
       allowNull: false,
       type: DataTypes.DATE,
       defaultValue: new Date()
     },
-    role_updated: {
+    terms_taxonomy_updated: {
       allowNull: false,
       type: DataTypes.DATE,
       defaultValue: new Date()
     }
   }, {
     sequelize,
-    modelName: 'Role',
-    id: 'role_id',
-    createdAt: 'role_created',
-    updatedAt: 'role_updated'
+    modelName: 'Terms_Taxonomy',
+    id: 'terms_taxonomy_id',
+    createdAt: 'terms_taxonomy_created',
+    updatedAt: 'terms_taxonomy_updated'
   });
-  return Role;
+  return Terms_Taxonomy;
 };
