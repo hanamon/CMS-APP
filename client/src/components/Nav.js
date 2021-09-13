@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import styled from "styled-components";
 
 const MenuNav = styled.nav`
-  background: pink;
+  background: yellowgreen;
 `;
 
 const MenuUl = styled.ul`

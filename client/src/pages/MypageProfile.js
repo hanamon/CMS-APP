@@ -23,6 +23,7 @@ function MypageProfile() {
     )
     .then((res) => {
       const { userInfo } = res.data.data;
+      console.log(userInfo);
       setUserInfoState({ ...userInfo });
       setLoadingState('ok');
     })
@@ -40,6 +41,7 @@ function MypageProfile() {
           <li>이메일 : {userInfoState.user_email}</li>
           <li>이름 : {userInfoState.user_name}</li>
           <li>닉네임 : {!userInfoState.user_nickname ? '닉네임이 없습니다.' : userInfoState.user_nickname}</li>
+          <li>공개이름 : {userInfoState.user_display}</li>
           <li>{userInfoState.user_role} 회원</li>
           <li>{userInfoState.user_created} 가입</li>
         </ul>

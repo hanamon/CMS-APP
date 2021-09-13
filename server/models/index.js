@@ -48,4 +48,7 @@ Term_Relationship.belongsTo(Term, { foreignKey: 'term_id' });
 Terms_Taxonomy.hasMany(Term_Relationship, { foreignKey: 'term_id' });
 Term_Relationship.belongsTo(Terms_Taxonomy, { foreignKey: 'term_id' });
 
+Term.hasMany(Terms_Taxonomy, { foreignKey: 'term_id' });
+Terms_Taxonomy.belongsTo(Term, { foreignKey: 'term_id' });
+
 module.exports = db;

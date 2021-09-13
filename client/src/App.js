@@ -8,7 +8,9 @@ import Login from './pages/Login';
 import Logout from './pages/Logout';
 import Signup from './pages/Signup';
 import Mypage from './pages/Mypage';
-import Hanamon from './pages/Hanamon';
+import Profile from './pages/Profile';
+import Post from './pages/Post';
+import Blog from './pages/Blog';
 
 function App() {
   const state = useSelector((state) => state.accessTokenReducer);
@@ -64,11 +66,11 @@ function App() {
             <Nav/>
           </header>
           <main>
-            <div>로그인 : { loginState ? 'True'  : 'False' }</div>
-            <div>토큰 : { tokenState }</div>
             <Switch>
               <Route exact path="/">홈</Route>
-              <Route exact path="/blog">블로그</Route>
+              <Route exact path="/blog">
+                <Blog />
+              </Route>
               <Route exact path="/project">프로젝트</Route>
               <Route exact path="/artwork">작품</Route>
               <Route exact path="/about">소개</Route>
@@ -84,8 +86,11 @@ function App() {
               <Route path="/mypage">
                 { !loginState ? <Redirect to="/login" /> : <Mypage loginState={loginState} /> }
               </Route>
-              <Route path="/hanamon">
-                <Hanamon />
+              <Route path="/:userId/:postPath">
+                <Post />
+              </Route>
+              <Route path="/:userId">
+                <Profile />
               </Route>
             </Switch>
           </main>

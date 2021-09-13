@@ -24,6 +24,10 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       type: DataTypes.STRING(200)
     },
+    term_path: {
+      allowNull: false,
+      type: DataTypes.STRING(200)
+    },
     term_created: {
       allowNull: false,
       type: DataTypes.DATE,

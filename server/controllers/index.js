@@ -5,5 +5,6 @@ module.exports = {
   mypage: require('./mypage'),
   users: require('./users'),
   posts: require('./posts'),
+  category: require('./category'),
   admin: require('./admin')
 }
