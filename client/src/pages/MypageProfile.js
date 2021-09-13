@@ -13,7 +13,7 @@ function MypageProfile() {
     user_name: '',
     user_nickname: '',
     user_role: '',
-    createdAt: '',
+    user_created: '',
   });
 
   useEffect(() => {
@@ -41,7 +41,7 @@ function MypageProfile() {
           <li>이름 : {userInfoState.user_name}</li>
           <li>닉네임 : {!userInfoState.user_nickname ? '닉네임이 없습니다.' : userInfoState.user_nickname}</li>
           <li>{userInfoState.user_role} 회원</li>
-          <li>{userInfoState.createdAt} 가입</li>
+          <li>{userInfoState.user_created} 가입</li>
         </ul>
       </div>
     )

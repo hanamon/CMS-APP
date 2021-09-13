@@ -102,12 +102,12 @@ function MypagePosts() {
               : (
                 postsState.map((post) => {
                   return (
-                    <PostLi key={post.id}>
+                    <PostLi key={post.post_id}>
                       <article>
                         <PostLink to={'/'+ userInfoState.user_login + '/' + post.post_path}>
                           <h4>{post.post_title}</h4>
                           <p>{post.post_content}</p>
-                          <span>{post.createdAt}</span>
+                          <span>{post.post_created}</span>
                         </PostLink>
                       </article>
                     </PostLi>   
