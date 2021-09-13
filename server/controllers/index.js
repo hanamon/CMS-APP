@@ -1,5 +1,4 @@
 module.exports = {
-  menuItems: require('./menu-items'),
   login: require('./login'),
   signup: require('./signup'),
   logout: require('./logout'),

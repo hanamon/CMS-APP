@@ -5,7 +5,6 @@ module.exports = async (req, res) => {
   try {
     // 헤더에 에세스토큰이 있는지 확인한다.
     const accessTokenData = isAuthorized(req);
-    console.log(accessTokenData);
 
     if( accessTokenData ) {
       const { user_login } = accessTokenData;

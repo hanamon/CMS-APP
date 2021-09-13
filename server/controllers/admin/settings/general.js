@@ -1,5 +1,10 @@
 module.exports = {
   get: async (req, res) => {
-    res.send('Hello World');
+    try {
+      res.send();
+    }
+    catch (err) {
+      console.error(err);
+    }
   }
 }
