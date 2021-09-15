@@ -24,7 +24,7 @@ const MenuLink = styled(Link)`
   }
 `
 
-function Nav() {
+function MainNav() {
   return (
     <MenuNav>
       <MenuUl>
@@ -32,7 +32,6 @@ function Nav() {
         <MenuLi><MenuLink to='/blog'>블로그</MenuLink></MenuLi>
         <MenuLi><MenuLink to='/project'>프로젝트</MenuLink></MenuLi>
         <MenuLi><MenuLink to='/artwork'>작품</MenuLink></MenuLi>
-        <MenuLi><MenuLink to='/about'>소개</MenuLink></MenuLi>
         <MenuLi><MenuLink to='/login'>로그인</MenuLink></MenuLi>
         <MenuLi><MenuLink to='/signup'>회원가입</MenuLink></MenuLi>
         <MenuLi><MenuLink to='/logout'>로그아웃</MenuLink></MenuLi>
@@ -43,4 +42,4 @@ function Nav() {
   );
 }
 
-export default Nav;
+export default MainNav;

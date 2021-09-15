@@ -1,38 +1,48 @@
 import axios from 'axios';
+import styled from 'styled-components'
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { Link, useLocation } from 'react-router-dom';
-import styled from 'styled-components'
-import MyPostTypeTap from '../components/MyPostTypeTap';
-import MyPostStatusTap from '../components/MyPostStatusTap';
+import { Link } from 'react-router-dom';
+import H2 from '../components/heading/H2';
+import MyPostTypeTab from '../components/mypage/MyPostTypeTab';
+import MyPostStatusTab from '../components/mypage/MyPostStatusTab';
 
 const PostWrapper = styled.div`
-  background: pink;
+  background-color: pink;
 `;
 
 const PostUl = styled.ul`
-  padding: 15px;
-  margin: 15px;
-  background-color: aqua;
+  padding: 7.5px;
 `;
 
 const PostLi = styled.li`
-  margin: 15px;
-  border: 1px solid #000;
+  padding: 7.5px;
 `;
 
 const PostLink = styled(Link)`
   display: block;
   padding: 15px;
+  border: 1px solid #000;
+  background-color: white;
+`;
+
+const PostCountWrap = styled.div`
+  padding: 5px 20px;
+  text-align: right;
+  background-color: tomato;
+`;
+
+const TextWrapper = styled.div`
+  padding: 30px;
+  background-color: pink;
 `;
 
 function MypagePosts() {
   const state = useSelector((state) => state.accessTokenReducer);
-  const location = useLocation();
   const [postsState, setPostsState] = useState([]);
   const [postCountState, setPostCountState] = useState(0);
-  const [loadingState, setLoadingState] = useState(null);
   const [postTypeState, setPostTypeState] = useState('');
+  const [postStatusState, setPostStatusState] = useState('');
   const [userInfoState, setUserInfoState] = useState({});
 
   const postsRequestHandler = async (e) => {
@@ -47,6 +57,7 @@ function MypagePosts() {
         postType = '?' + e.target.name;
       }
       if( query[0] === 'post_status' ) {
+        setPostStatusState(e.target.name);
         if( !postTypeState ) postStatus = '?' + e.target.name;
         else {
           postType = '?' + postTypeState;
@@ -55,13 +66,11 @@ function MypagePosts() {
       }
       
       const endpoint = 'http://localhost:4000/mypage/posts' + postType + postStatus;
-      //console.log(endpoint);
       const result = await axios.get(endpoint, { headers: { authorization: `accessToken ${state.value}` }, withCredentials: true });
       const { posts } = result.data.data;
       setPostsState(posts.rows);
       setPostCountState(posts.count);
-    }
-    catch (err) {
+    } catch (err) {
       console.log(err);
     }
   }
@@ -69,57 +78,64 @@ function MypagePosts() {
   useEffect(() => {
     const url = new URL(window.location.href);
     const currentPostType = url.searchParams.get('post_type') || 'all';
-    setPostTypeState('post_type=' + currentPostType);
+    const currentPostStatus = url.searchParams.get('post_status') || 'all';
 
-    axios.get(
-      'http://localhost:4000/mypage/posts',
-      { headers: { authorization: `accessToken ${state.value}` }, withCredentials: true }
-    )
-    .then((res) => {
-      const { posts, userInfo } = res.data.data;
-      setPostsState(posts.rows);
-      setPostCountState(posts.count);
-      setUserInfoState({ ...userInfo });
-      setLoadingState('ok');
-    })
-    .catch((err) => console.log(err));
+    setPostTypeState('post_type=' + currentPostType);
+    setPostStatusState('post_status=' + currentPostStatus);
+
+    let endpoint = 'http://localhost:4000/mypage/posts';
+    if( currentPostType && currentPostStatus ) {
+      endpoint = 'http://localhost:4000/mypage/posts?post_type=' + currentPostType + '&post_status=' + currentPostStatus;
+    }
+    else if( currentPostType && !currentPostStatus ) {
+      endpoint = 'http://localhost:4000/mypage/posts?post_type=' + currentPostType;
+    }
+    else if( !currentPostType && currentPostStatus ) {
+      endpoint = 'http://localhost:4000/mypage/posts?post_status=' + currentPostStatus;
+    }
+
+    axios.get(endpoint, { headers: { authorization: `accessToken ${state.value}` }, withCredentials: true })
+      .then((res) => {
+        const { posts, userInfo } = res.data.data;
+        setPostsState(posts.rows);
+        setPostCountState(posts.count);
+        setUserInfoState(userInfo);
+      })
+      .catch((err) => console.log(err));
   }, []);
 
   return (
-    loadingState
-    ? (
       <div>
-        <h3>게시글</h3>
-        <p>작성하신 게시글입니다.</p>
-        <p>총 : {postCountState}</p>
-        <PostWrapper>
-          <MyPostTypeTap postsRequestHandler={postsRequestHandler} postTypeState={postTypeState} />
-          <MyPostStatusTap postsRequestHandler={postsRequestHandler} postTypeState={postTypeState} />
-          <PostUl>
-            {
-              ! postCountState
-              ? <div>비었습니다.</div>
-              : (
-                postsState.map((post) => {
-                  return (
-                    <PostLi key={post.post_id}>
-                      <article>
-                        <PostLink to={'/'+ userInfoState.user_login + '/' + post.post_path}>
-                          <h4>{post.post_title}</h4>
-                          <p>{post.post_content}</p>
-                          <span>{post.post_created}</span>
-                        </PostLink>
-                      </article>
-                    </PostLi>   
-                  )
-                })
-              )
-            }
-          </PostUl>
-        </PostWrapper>
+        <H2>게시글</H2>
+        <MyPostTypeTab postsRequestHandler={postsRequestHandler} postTypeState={postTypeState} />
+        <MyPostStatusTab postsRequestHandler={postsRequestHandler} postTypeState={postTypeState} postStatusState={postStatusState} />
+        <PostCountWrap><span>총 : {postCountState}개</span></PostCountWrap>
+        {
+          ! postCountState
+          ? <TextWrapper>비었습니다.</TextWrapper>
+          : (
+            <PostWrapper>
+              <PostUl>
+                {
+                  postsState.map((post) => {
+                    return (
+                      <PostLi key={post.post_id}>
+                        <article>
+                          <PostLink to={'/'+ userInfoState.user_login + '/' + post.post_path}>
+                            <h4>{post.post_title}</h4>
+                            <p>{post.post_content}</p>
+                            <span>{post.post_created}</span>
+                          </PostLink>
+                        </article>
+                      </PostLi>   
+                    )
+                  })
+                }
+              </PostUl>
+            </PostWrapper>
+          )
+        }
       </div>
-    )
-    : null
   );
 }
 

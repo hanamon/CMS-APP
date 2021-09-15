@@ -3,16 +3,18 @@ import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { updateAccessToken } from './actions/authAction';
-import Nav from './components/Nav';
+import Home from './pages/Home';
+import Blog from './pages/Blog';
+import Project from './pages/Project';
+import ArtWork from './pages/ArtWork';
 import Login from './pages/Login';
 import Logout from './pages/Logout';
 import Signup from './pages/Signup';
 import Mypage from './pages/Mypage';
 import Profile from './pages/Profile';
-import Post from './pages/Post';
-import Blog from './pages/Blog';
-import Project from './pages/Project';
-import ArtWork from './pages/ArtWork';
+import Admin from './pages/Admin';
+import NotFound from './pages/NotFound';
+import SinglePost from './pages/SinglePost';
 
 function App() {
   const state = useSelector((state) => state.accessTokenReducer);
@@ -32,21 +34,16 @@ function App() {
   
   const isLogout = async () => {
     try {
-      const result = await axios.get(
-        'http://localhost:4000/logout',
-        { withCredentials: true }
-      );
+      const result = await axios.get('http://localhost:4000/logout', { withCredentials: true });
       if( result ) setLoginState(false);
-    }
-    catch (err) {
+    } catch (err) {
       console.log(err);
-    }  
+    }
   }
 
   useEffect(() => {
     axios.get('http://localhost:4000/login', { withCredentials: true })
       .then((res) => {
-        console.log('토큰 있네...');
         const { accessToken } = res.data.data;
         dispatch(updateAccessToken(accessToken));
         issueAccessToken(accessToken);
@@ -55,7 +52,6 @@ function App() {
       })  
       .catch((err) => {
         setLoadingState('ok');
-        console.log('토큰 없네...')
       });
   }, []);
 
@@ -64,47 +60,31 @@ function App() {
     ? (
       <BrowserRouter>
         <div className="App">
-          <header>
-            <Nav/>
-          </header>
-          <main>
-            <Switch>
-              <Route exact path="/">홈</Route>
-              <Route path="/search">
-                검색 결과
-              </Route>
-              <Route path="/blog">
-                <Blog />
-              </Route>
-              <Route path="/project">
-                <Project />
-              </Route>
-              <Route path="/artwork">
-                <ArtWork />
-              </Route>
-              <Route exact path="/about">소개</Route>
-              <Route exact path="/login">
-                <Login isLogin={isLogin} loginState={loginState} />
-              </Route>
-              <Route exact path="/signup">
-                <Signup loginState={loginState} />
-              </Route>
-              <Route exact path="/logout">
-                { !loginState ? <Redirect to="/" /> : <Logout isLogout={isLogout} /> }
-              </Route>
-              <Route path="/mypage">
-                { !loginState ? <Redirect to="/login" /> : <Mypage loginState={loginState} /> }
-              </Route>
-              <Route path="/:userId/:postPath">
-                <Post />
-              </Route>
-              <Route path="/:userId">
-                <Profile />
-              </Route>
-            </Switch>
-          </main>
-          <footer>
-          </footer>
+          <Switch>
+            <Route path="/signup" exact>
+              <Signup loginState={loginState} />
+            </Route>
+            <Route path="/login" exact>
+              <Login isLogin={isLogin} loginState={loginState} />
+            </Route>
+            <Route path="/logout" exact>
+              { !loginState ? <Redirect to="/" /> : <Logout isLogout={isLogout} /> }
+            </Route>
+            <Route path="/mypage">
+              { !loginState ? <Redirect to="/login" /> : <Mypage loginState={loginState} /> }
+            </Route>
+            <Route path="/admin">
+              { !loginState ? <Redirect to="/login" /> : <Admin /> }
+            </Route>
+            <Route path="/" exact children={<Home />} />
+            <Route path="/404" exact children={<NotFound />} />
+            <Route path="/search">검색 결과</Route>
+            <Route path="/blog" children={<Blog />} />
+            <Route path="/project" children={<Project />} />
+            <Route path="/artwork" children={<ArtWork />} />
+            <Route path="/:userId" exact children={<Profile />} />
+            <Route path="/:userId/:postPath" children={<SinglePost />} />
+          </Switch>
         </div>
       </BrowserRouter>
     )

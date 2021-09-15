@@ -11,11 +11,11 @@ const TapButton = styled(Link)`
   background-color: ${props => props.current ? 'seagreen' : 'none'};
 `;
 
-function MyPostTypeTapButton({ children, name, onClick, postTypeState }) {
+function MyPostTypeTabButton({ children, name, onClick, postTypeState }) {
   //console.log(postTypeState, name);
   return (
     <TapButton current={postTypeState === name ? "true" : null} to={"?" + name} name={name} onClick={(e) => onClick(e)}>{children}</TapButton>
   );
 }
 
-export default MyPostTypeTapButton;
+export default MyPostTypeTabButton;

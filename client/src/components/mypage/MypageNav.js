@@ -2,22 +2,25 @@ import { Link } from 'react-router-dom';
 import styled from "styled-components";
 
 const MenuNav = styled.nav`
+  padding: 30px;
   background: skyblue;
 `;
 
 const MenuUl = styled.ul`
   display: inline-block;
+  padding: 7.5px;
+  background-color: lightyellow;
 `;
 
 const MenuLi = styled.li`
-  display: inline-block;
   font-size: 1.2em;
 `;
 
 const MenuLink = styled(Link)`
   display: block;
   color: black;
-  padding: 10px;
+  line-height: 100%;
+  padding: 15px 20px;
   &:hover {
     color: white;
     background: blueviolet;

@@ -6,13 +6,13 @@ const TapButton = styled(Link)`
   display: inline-block;
   font-size: 0.8rem;
   margin: 5px;
-  padding: 5px 10px;
+  padding: 8px 24px;
   color: white;
   border: 1px solid block;
-  background-color: slateblue;
+  background-color: ${props => props.current ? '#444' : '#888'};
 `;
 
-function MyPostStatusTapButton({ children, name, postTypeState, onClick }) {
+function MyPostStatusTabButton({ children, name, onClick, postTypeState, postStatusState }) {
   const [urlState, setUrlState] = useState('');
 
   useEffect(() => {
@@ -21,8 +21,8 @@ function MyPostStatusTapButton({ children, name, postTypeState, onClick }) {
   }, [postTypeState]);
 
   return (
-    <TapButton to={urlState} name={name} onClick={(e) => onClick(e)}>{children}</TapButton>
+    <TapButton current={postStatusState === name ? "true" : null} to={urlState} name={name} onClick={(e) => onClick(e)}>{children}</TapButton>
   );
 }
 
-export default MyPostStatusTapButton;
+export default MyPostStatusTabButton;
