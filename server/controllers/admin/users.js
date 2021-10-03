@@ -6,7 +6,7 @@ module.exports = {
   get: async (req, res) => {
     try {
       // 관리자 인증 검사
-      //const userInfo = await adminAnuthen(req, res);
+      const userInfo = await adminAnuthen(req, res);
       
       let { paged, post_number, search } = req.query;
       const queryKeys = Object.keys(req.query);
