@@ -37,6 +37,9 @@ module.exports = {
     try {
       const { user_login, user_pass } = req.body;
   
+      // 요청이 잘못된 경우
+      if( !user_login || !user_pass ) return res.status(400).json({ message: 'Bad Request' });
+
       // 등록된 회원이 존재하는지 확인한다.
       const userInfo = await User.findOne({ where: { user_login } });  
       if( !userInfo ) return res.status(401).json({ data: null, message: 'not authorized' });

@@ -22,7 +22,7 @@ module.exports = {
       const hash = await bcrypt.hash(user_pass, 10);
   
       // 새로운 회원 생성
-      const newUser = await User.create({ user_login, user_pass : hash, user_name, user_email, user_display: user_login });
+      const newUser = await User.create({ user_login, user_pass : hash, user_name, user_email, user_nickname: user_login });
   
       // 비밀번호 제거 후 회원 정보 리턴
       delete newUser.dataValues.user_pass;
