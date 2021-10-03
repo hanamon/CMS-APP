@@ -13,10 +13,10 @@ router.use('/admin', adminRouter);
 
 router.get('/users/:userId', controllers.users.get);
 
+router.get('/category', controllers.category.get);
+
 router.get('/posts', controllers.posts.get);
 router.get('/posts/:userId', controllers.posts.get);
 router.get('/posts/:userId/:postPath', controllers.posts.get);
-
-router.get('/category', controllers.category.get);
 
 module.exports = router;
