@@ -12,9 +12,9 @@ module.exports = {
           [Op.and]: [
             // 기본적으로 공개 글만 필터링한다.
             { post_status: 'publish' },
-            // 쿼리로 글 유형이 들어온 경우 해당 글 유형으로 작성한 것만 필터링한다.
+            // 쿼리가 들어온 경우 쿼리에 해당한 것만 필터링한다.
             post_type ? { post_type } : null,
-            // 쿼리로 검색이 있는 경우 관련 포스트를 찾아서 리턴한다.
+            postPath ? { post_path: postPath } : null,
             search ? { 
               [Op.or]: [
                 { post_title: { [Op.like]: '%' + search + '%' } }, 
@@ -23,7 +23,7 @@ module.exports = {
             } : null
           ]
         },
-        attributes: ['post_id', 'post_title', 'post_content', 'post_type', 'post_type', 'post_status', 'post_created'],
+        attributes: ['post_id', 'post_title', 'post_content', 'post_type', 'post_path', 'post_status', 'post_created'],
         include: [
           {
             model: User,
