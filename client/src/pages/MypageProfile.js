@@ -12,7 +12,6 @@ const Wrapper = styled.div`
 
 const Ul = styled.ul`
   padding: 15px;
-  //background-color: white;
 `;
 
 const Li = styled.li`
@@ -25,7 +24,15 @@ const ProfileBtnWrap = styled.div`
   padding: 15px;
 `;
 
-const ProfileBtn = styled(Link)`
+const ProfileLink = styled(Link)`
+  display: inline-block;
+  padding: 15px 30px;
+  font-size: 1.2rem;
+  color: white;
+  background-color: purple;
+`;
+
+const ProfileUpdateBtn = styled.button`
   display: inline-block;
   padding: 15px 30px;
   font-size: 1.2rem;
@@ -36,8 +43,12 @@ const ProfileBtn = styled(Link)`
 function MypageProfile() {
   const state = useSelector((state) => state.accessTokenReducer);
   const [userInfoState, setUserInfoState] = useState({});
+  /*const [passwordState, setPasswordState] = useState({
+    pass: '',
+    passCheck: ''
+  });*/
 
-  useEffect(() => {
+  const getUserProfile = () => {
     axios.get(
       'http://localhost:4000/mypage/profile',
       { headers: { authorization: `accessToken ${state.value}` }, withCredentials: true }
@@ -47,6 +58,37 @@ function MypageProfile() {
       setUserInfoState(userInfo);
     })
     .catch((err) => console.log(err));
+  }
+
+  const putUserProfile = async () => {
+    // TODO: PUT 요청
+    axios.put(
+      'http://localhost:4000/mypage/profile',
+      { user_login: userInfoState.user_login, user_nickname: userInfoState.user_nickname },
+      { headers: { authorization: `accessToken ${state.value}` }, withCredentials: true }
+    )
+    .then((res) => {
+      console.log(res.data.data);
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+  }
+
+  const validationCheck = () => {
+    // TODO: 유효성 검사
+    putUserProfile();
+  }
+
+  const inputChangeHandler = (e) => {
+    setUserInfoState({
+      ...userInfoState,
+      [e.target.name]:  e.target.value
+    })
+  }
+
+  useEffect(() => {
+    getUserProfile();
   }, []);
 
   return (
@@ -54,15 +96,25 @@ function MypageProfile() {
       <H2>프로필 설정</H2>
       <Wrapper>
         <Ul>
-          <Li>이름 : {userInfoState.user_name}</Li>
-          <Li>아이디 : {userInfoState.user_login}</Li>
-          <Li>이메일 : {userInfoState.user_email}</Li>
-          <Li>닉네임 : {!userInfoState.user_nickname ? '닉네임이 없습니다.' : userInfoState.user_nickname}</Li>
-          <Li>공개이름 : {userInfoState.user_display}</Li>
-          <Li>가입일자 : {new Date(userInfoState.user_created).toLocaleDateString('ko-KR', { year: 'numeric', month: 'long', day: 'numeric' })}</Li>
+          <Li>
+            아이디 : {userInfoState.user_login}
+          </Li>
+          <Li>
+            닉네임 : <input onChange={inputChangeHandler} name="user_nickname" value={userInfoState.user_nickname} placeholder="닉네임이 없습니다." />
+          </Li>
+          <Li>
+            이메일 : {userInfoState.user_email}
+          </Li>
+          {/*<Li>
+            비밀번호 변경 : <input type="password" />
+          </Li>
+          <Li>
+            비밀번호 변경 확인 : <input type="password" />
+          </Li>*/}
         </Ul>
         <ProfileBtnWrap>
-          <ProfileBtn to={'/' + userInfoState.user_login}>내프로필 보기</ProfileBtn>
+          {/*<ProfileLink to={'/' + userInfoState.user_login}>내프로필 보기</ProfileLink>*/}
+          <ProfileUpdateBtn onClick={validationCheck}>프로필 수정</ProfileUpdateBtn>
         </ProfileBtnWrap>
       </Wrapper>
     </div>
